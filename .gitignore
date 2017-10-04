@@ -1,0 +1,14 @@
+/target
+/.idea
+/cucumber-allure-examples.iml
+/.project
+/.settings
+/.classpath
+/bin/
+.metadata
+RemoteSystemsTempFiles
+/.clover/
+/.idea
+*.iml
+*.log
+*.yml
