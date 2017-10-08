@@ -23,7 +23,7 @@ public class Hooks extends CommonCode {
 	static String nodeURL = getConfigForproperty("aut");
 
 	@Before
-	public void getBrowser() throws MalformedURLException {
+	public void getBrowser() throws MalformedURLException {/*
 
 		Browsers browser;
 		if (System.getProperty(BROWSER_PROP_KEY) == null) {
@@ -69,11 +69,11 @@ public class Hooks extends CommonCode {
 			System.out.println("executed");
 			break;
 		}
-	}
+	*/}
 
 	@After
-	public void close() {
+	public void close() {/*
 		driver.quit();
-	}
+	*/}
 
 }

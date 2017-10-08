@@ -27,15 +27,11 @@ import ru.yandex.qatools.allure.annotations.Attachment;
 
 public class CommonCode {
 
-
 	public static RemoteWebDriver driver;
 	public static RemoteWebDriver elasticSearchDriver;
 	public static RemoteWebDriver visitordriver;
 	public static Properties loadedConfig = getConfig();
-	public int casesToTest = Integer.parseInt(getConfigForproperty("casesToTest"));
-	public String hubURL = getConfigForproperty("hubURL");
-	public List<String>           log          = new ArrayList<>();
-	public static Properties loadedCreateConfig = getCreateApp();
+	public List<String> log = new ArrayList<>();
 
 	public CommonCode() {
 	}
@@ -59,7 +55,8 @@ public class CommonCode {
 
 	private static Properties getConfig() {
 		InputStream input = null;
-		input = Thread.currentThread().getContextClassLoader().getResourceAsStream("config.properties");
+		input = Thread.currentThread().getContextClassLoader()
+				.getResourceAsStream("config.properties");
 		final Properties prop = new Properties();
 		try {
 			prop.load(input);
@@ -75,36 +72,20 @@ public class CommonCode {
 
 	}
 
-	private static Properties getCreateApp() {
-		InputStream input = null;
-		input = Thread.currentThread().getContextClassLoader().getResourceAsStream("CreateApplication.properties");
-		final Properties prop = new Properties();
-		try {
-			prop.load(input);
-		} catch (final IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return prop;
-	}
-
-	public static String getCreateproperty(String prop) {
-		return loadedCreateConfig.getProperty(prop);
-
-	}
-
 	public void acceptAlter() throws NoAlertPresentException {
 		Alert simpleAlert = driver.switchTo().alert();
 		simpleAlert.accept();
 
 	}
 
-	public static List<WebElement> WaitForElements(List<WebElement> eles, WebDriver driver) {
+	public static List<WebElement> WaitForElements(List<WebElement> eles,
+			WebDriver driver) {
 		ArrayList<WebElement> element = new ArrayList<WebElement>();
 
 		try {
 			for (WebElement elements : eles) {
-				element.add((new WebDriverWait(driver, 30)).until(ExpectedConditions.visibilityOf(elements)));
+				element.add((new WebDriverWait(driver, 30))
+						.until(ExpectedConditions.visibilityOf(elements)));
 			}
 		} catch (Exception e) {
 
@@ -134,7 +115,8 @@ public class CommonCode {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		((JavascriptExecutor) driver).executeScript("window.scrollTo(0," + element.getLocation().y + ")");
+		((JavascriptExecutor) driver).executeScript("window.scrollTo(0,"
+				+ element.getLocation().y + ")");
 		element.click();
 	}
 
@@ -142,7 +124,8 @@ public class CommonCode {
 		System.out.println("Waiting for " + expected + " text to appear");
 		try {
 			final WebDriverWait wait = new WebDriverWait(driver, 10);
-			wait.until(ExpectedConditions.textToBePresentInElement(element, expected));
+			wait.until(ExpectedConditions.textToBePresentInElement(element,
+					expected));
 		} catch (final org.openqa.selenium.TimeoutException e) {
 			writeScreenshotToFile(driver);
 			System.out.println("Expected String not present");
@@ -187,11 +170,14 @@ public class CommonCode {
 
 	@Attachment(value = "Screen Capture", type = "image/png")
 	public static byte[] writeScreenshotToFile(WebDriver driver) {
-		final File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		final File scrFile = ((TakesScreenshot) driver)
+				.getScreenshotAs(OutputType.FILE);
 		try {
 
-			final FileOutputStream screenshotStream = new FileOutputStream(scrFile);
-			final byte[] bytes = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+			final FileOutputStream screenshotStream = new FileOutputStream(
+					scrFile);
+			final byte[] bytes = ((TakesScreenshot) driver)
+					.getScreenshotAs(OutputType.BYTES);
 			screenshotStream.write(bytes);
 			screenshotStream.close();
 			return bytes;
@@ -205,7 +191,8 @@ public class CommonCode {
 	public static WebElement WaitForBy(By by, WebDriver driver) {
 
 		try {
-			return new WebDriverWait(driver, 40).until(ExpectedConditions.visibilityOfElementLocated(by));
+			return new WebDriverWait(driver, 40).until(ExpectedConditions
+					.visibilityOfElementLocated(by));
 		}
 
 		catch (final Exception e) {
@@ -217,7 +204,8 @@ public class CommonCode {
 	public static WebElement waitForElement(WebElement element, WebDriver driver) {
 		try {
 
-			return new WebDriverWait(driver, 80).until(ExpectedConditions.visibilityOf(element));
+			return new WebDriverWait(driver, 80).until(ExpectedConditions
+					.visibilityOf(element));
 		}
 
 		catch (final Exception e) {
@@ -226,10 +214,12 @@ public class CommonCode {
 		return null;
 	}
 
-	public static WebElement waitForElementTime(WebElement element, WebDriver driver) {
+	public static WebElement waitForElementTime(WebElement element,
+			WebDriver driver) {
 		try {
 
-			return new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(element));
+			return new WebDriverWait(driver, 10).until(ExpectedConditions
+					.visibilityOf(element));
 		}
 
 		catch (final Exception e) {
@@ -238,10 +228,12 @@ public class CommonCode {
 		return null;
 	}
 
-	public static WebElement WaitForElementToBeClickable(WebElement element, WebDriver driver) {
+	public static WebElement WaitForElementToBeClickable(WebElement element,
+			WebDriver driver) {
 		try {
 
-			return new WebDriverWait(driver, 80).until(ExpectedConditions.elementToBeClickable(element));
+			return new WebDriverWait(driver, 80).until(ExpectedConditions
+					.elementToBeClickable(element));
 		}
 
 		catch (final Exception e) {
@@ -252,7 +244,8 @@ public class CommonCode {
 
 	public static WebElement waitAjaxCall(WebElement element, WebDriver driver) {
 		try {
-			return new WebDriverWait(driver, 80).until(ExpectedConditions.elementToBeClickable(element));
+			return new WebDriverWait(driver, 80).until(ExpectedConditions
+					.elementToBeClickable(element));
 		} catch (final Exception e) {
 			System.out.println("Element Not Present.");
 		}
@@ -260,9 +253,11 @@ public class CommonCode {
 
 	}
 
-	public static WebElement waitForPageFactory(WebElement element, WebDriver driver) {
+	public static WebElement waitForPageFactory(WebElement element,
+			WebDriver driver) {
 		try {
-			element = new WebDriverWait(driver, 80).until(ExpectedConditions.visibilityOf(element));
+			element = new WebDriverWait(driver, 80).until(ExpectedConditions
+					.visibilityOf(element));
 			highLightElement(driver, element);
 			element.getText();
 			return element;
@@ -282,7 +277,8 @@ public class CommonCode {
 				elementName.getText();
 			} catch (final StaleElementReferenceException e) {
 				e.toString();
-				System.out.println("Trying to recover from a stale element :" + e.getMessage());
+				System.out.println("Trying to recover from a stale element :"
+						+ e.getMessage());
 				count = count + 1;
 			}
 			count = count + 4;
@@ -291,13 +287,17 @@ public class CommonCode {
 
 	public static void highLightElement(WebDriver driver, WebElement element) {
 		final JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].setAttribute('style', 'background: yellow; border: 2px solid red;');", element);
+		js.executeScript(
+				"arguments[0].setAttribute('style', 'background: yellow; border: 2px solid red;');",
+				element);
 		try {
 			Thread.sleep(250);
 		} catch (final InterruptedException e) {
 			System.out.println(e.getMessage());
 		}
-		js.executeScript("arguments[0].setAttribute('style','border: solid 2px white');", element);
+		js.executeScript(
+				"arguments[0].setAttribute('style','border: solid 2px white');",
+				element);
 
 	}
 
@@ -388,7 +388,9 @@ public class CommonCode {
 
 		try {
 			for (final By by : bys) {
-				element.add(new WebDriverWait(driver, 60).until(ExpectedConditions.visibilityOfElementLocated(by)));
+				element.add(new WebDriverWait(driver, 60)
+						.until(ExpectedConditions
+								.visibilityOfElementLocated(by)));
 			}
 		} catch (final Exception e) {
 			System.out.println("Caught");
@@ -415,6 +417,5 @@ public class CommonCode {
 			e.printStackTrace();
 		}
 	}
-	
 
 }

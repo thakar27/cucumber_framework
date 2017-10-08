@@ -1,0 +1,25 @@
+<qa:environment xmlns:qa="urn:model.commons.qatools.yandex.ru">
+    <id>3.0.1 SNAPSHOT</id>
+    <name>Response Automation Test Suite</name>
+    <parameter>
+        <name>Browser</name>
+        <key>Browser</key>
+        <value>Chrome</value>
+    </parameter>
+    <parameter>
+        <name>Application</name>
+        <key>Application</key>
+        <value>http://i-docker.ityx.de:8222/response/</value>
+    </parameter>
+	<parameter>
+        <name>Build_Version</name>
+        <key>Build_Version</key>
+        <value>3.0.2 SNAPSHOT</value>
+    </parameter>
+	
+	<parameter>
+        <name>Build_Date</name>
+        <key>Build_Date</key>
+        <value>12 November 2016</value>
+    </parameter>
+</qa:environment> 
