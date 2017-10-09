@@ -14,7 +14,7 @@ import code.Browsers;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 
-public class Hooks extends CommonCode {
+public class Hooks extends CommonCode {/*
 
 	private static final String BROWSER_PROP_KEY = "browser";
 
@@ -76,4 +76,4 @@ public class Hooks extends CommonCode {
 		driver.quit();
 	}
 
-}
+*/}
