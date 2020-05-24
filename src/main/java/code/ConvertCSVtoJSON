@@ -1,0 +1,48 @@
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.*;
+
+public class ConvertCSVtoJSON {
+
+    public static void main(String args[]) {
+        ConvertCSVtoJSON obj = new ConvertCSVtoJSON();
+        try {
+            obj.convertFile();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void convertFile() throws IOException {
+        String a = "";
+        try (InputStream in = new FileInputStream("P:\\Data\\TestData.csv")) {
+            CSV csv = new CSV(true, ',', in);
+            List<Object> fieldNames = null;
+            if (csv.hasNext()) fieldNames = new ArrayList<>(csv.next());
+            HashMap<Object, Map<Object, Object>> csvData = new HashMap<>();
+            HashMap<Object, Map<Object, Object>> finalData = new HashMap<>();
+            while (csv.hasNext()) {
+                List<String> x = csv.next();
+                Map<Object, Object> obj = new LinkedHashMap<>();
+                for (int i = 0; i < x.size(); i++) {
+                    if (i == 0) {
+                        a = x.get(i);
+                    } else {
+                        obj.put(fieldNames.get(i), x.get(i));
+                    }
+                }
+                csvData.put(a, obj);
+            }
+
+            finalData.putAll(csvData);
+
+            ObjectMapper mapper2 = new ObjectMapper();
+            mapper2.enable(SerializationFeature.INDENT_OUTPUT);
+            mapper2.writeValue(System.out, finalData);
+        }
+    }
+}
